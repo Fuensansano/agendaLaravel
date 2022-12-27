@@ -1,0 +1,19 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+//@import 'variables';
+
+
+// Bootstrap
+@import "bootswatch/dist/darkly/bootstrap.min.css";
+// TODO: Note: Replace ^[theme]^ (examples: darkly, slate, cosmo, spacelab, and superhero. See https://bootswatch.com for current theme names.)
+
+.navbar img {
+    width: 1.2rem;
+}
+
+.welcome {
+    background: url('/resources/img/fondo.webp') center center;
+    background-size: cover;
+}

@@ -1,0 +1,8 @@
+.navbar img {
+    width: 1.2rem;
+}
+
+.welcome {
+    background: url('/resources/img/fondo.webp') center center;
+    background-size: cover;
+}
