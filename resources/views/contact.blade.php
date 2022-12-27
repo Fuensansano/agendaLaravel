@@ -15,7 +15,14 @@
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
-                                           class="form-control" required autocomplete="name" name="name" autofocus>
+                                           class="form-control @error('name') is-invalid @enderror" autocomplete="name"
+                                           name="name" autofocus value="{{ old('name') }}">
+
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -25,7 +32,47 @@
 
                                 <div class="col-md-6">
                                     <input id="phone_number" type="tel"
-                                           class="form-control" required autocomplete="phone_number" name="phone_number">
+                                           class="form-control @error('phone_number') is-invalid @enderror" autocomplete="phone_number"
+                                           name="phone_number" value="{{ old('phone_number') }}">
+
+                                    @error('phone_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="age"
+                                       class="col-md-4 col-form-label text-md-end">Age</label>
+
+                                <div class="col-md-6">
+                                    <input id="age" type="text"
+                                           class="form-control @error('age') is-invalid @enderror" autocomplete="age"
+                                           name="age" value="{{ old('age') }}">
+
+                                    @error('age')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="text"
+                                           class="form-control @error('email') is-invalid @enderror"
+                                           autocomplete="email" name="email" autofocus value="{{ old('email') }}">
+
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 
