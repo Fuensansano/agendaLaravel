@@ -12,7 +12,7 @@ class Exercise3 extends TestCase
      * - [ ] Has battery false and battery_duration null or not on the request
      * @test
      */
-    public function given_a_rigth_information_we_expect_to_return_200()
+    final public function given_a_rigth_information_we_expect_to_return_200(): void
     {
         $formInput = [
             "name" => "Keyboard",
@@ -740,14 +740,15 @@ class Exercise3 extends TestCase
      * @dataProvider requiredFieldsProvider
      * @test
      */
-    public function given_a_bad_request_field_we_expect_to_return_302(array $formInput)
+    final public function given_a_bad_request_field_we_expect_to_return_302(array $formInput): void
     {
         $response = $this->post('/ejercicio3', $formInput);
         $response->assertStatus(302);
     }
 
     /** @test */
-    public function all_fields_wrong() {
+    final public function all_fields_wrong(): void
+    {
         $response = $this->post('/ejercicio3', [
             'name' => null,
             'description' => null,
