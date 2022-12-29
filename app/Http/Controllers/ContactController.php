@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreContactRequest;
 use App\Models\Contact;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
@@ -23,16 +24,9 @@ class ContactController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(StoreContactRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'phone_number' => 'required|digits:9',
-            'age' => 'required|numeric|min:1|max:105',
-            'email' => 'required|email',
-        ]);
-
-        auth()->user()->contacts()->create($data);
+        auth()->user()->contacts()->create($request->validated());
         return redirect()->route('home');
     }
 
@@ -52,18 +46,11 @@ class ContactController extends Controller
     }
 
 
-    public function update(Request $request, Contact $contact)
+    public function update(StoreContactRequest $request, Contact $contact)
     {
-        $this->authorize('view',$contact);
+        $this->authorize('update',$contact);
 
-        $data = $request->validate([
-            'name' => 'required',
-            'phone_number' => 'required|digits:9',
-            'age' => 'required|numeric|min:1|max:105',
-            'email' => 'required|email',
-        ]);
-
-        $contact->update($data);
+        $contact->update($request->validated());
         return redirect()->route('home');
     }
 
