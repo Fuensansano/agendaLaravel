@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -38,18 +39,23 @@ class ContactController extends Controller
 
     public function show(Contact $contact)
     {
+        $this->authorize('view',$contact);
+
         return view('contacts.show', compact('contact'));
     }
 
 
     public function edit(Contact $contact)
     {
+        $this->authorize('view',$contact);
         return view('contacts.edit', compact('contact'));
     }
 
 
     public function update(Request $request, Contact $contact)
     {
+        $this->authorize('view',$contact);
+
         $data = $request->validate([
             'name' => 'required',
             'phone_number' => 'required|digits:9',
@@ -64,6 +70,8 @@ class ContactController extends Controller
 
     public function destroy(Contact $contact)
     {
+        $this->authorize('view',$contact);
+
         $contact->delete();
         return redirect()->route('home');
     }
