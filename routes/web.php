@@ -18,6 +18,8 @@ Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit'])->name
 
 Route::put('/contacts/{contact}/update', [ContactController::class, 'update'])->name('contacts.update');
 
+Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+
 Route::post('/contacts/', [ContactController::class, 'store'])->name('contacts.store');
 
 
