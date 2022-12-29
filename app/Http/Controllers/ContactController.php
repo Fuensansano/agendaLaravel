@@ -17,19 +17,21 @@ class ContactController extends Controller
 
     public function create()
     {
-        return view('contact');
+        return view('contacts.create');
     }
 
 
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required',
             'phone_number' => 'required|digits:9',
             'age' => 'required|numeric|min:1|max:105',
             'email' => 'required|email',
         ]);
-        return response("contact stored");
+
+        Contact::create($data);
+        return redirect()->route('home');
     }
 
 
@@ -41,13 +43,21 @@ class ContactController extends Controller
 
     public function edit(Contact $contact)
     {
-        //
+        return view('contacts.edit', compact('contact'));
     }
 
 
     public function update(Request $request, Contact $contact)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'phone_number' => 'required|digits:9',
+            'age' => 'required|numeric|min:1|max:105',
+            'email' => 'required|email',
+        ]);
+
+        $contact->update($data);
+        return redirect()->route('home');
     }
 
 

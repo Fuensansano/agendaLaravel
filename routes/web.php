@@ -12,27 +12,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/contact/create', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact/', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
 
-Route::post('/ejercicio3', function (Request $request) {
-    $request->validate([
-        'name' => 'required|max:64',
-        'description' => 'required|max:512',
-        'price' => 'required|numeric|min:1',
-        'has_battery' => 'required|boolean',
-        'colors' => 'required|array',
-        'colors.*' => 'required|string',
-        'dimensions' => 'required|array',
-        'dimensions.width' => 'required|numeric|min:1',
-        'dimensions.height' => 'required|numeric|min:1',
-        'dimensions.length' => 'required|numeric|min:1',
-        'accessories' => 'required|array',
-        'accessories.*.price' => 'required|numeric|min:1',
-        'accessories.*.name' => 'required|string',
+Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
 
-    ]);
-});
+Route::put('/contacts/{contact}/update', [ContactController::class, 'update'])->name('contacts.update');
+
+Route::post('/contacts/', [ContactController::class, 'store'])->name('contacts.store');
+
+
+
 
 /*
 Route::post('/contact',  function (Request $request) {
