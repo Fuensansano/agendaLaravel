@@ -90,6 +90,14 @@
         @if($alert = session()->get('alert'))
             <x-alert :type="$alert['type']" :message="$alert['message']"/>
         @endif
+
+        @if(!auth()->user()?->subscribed() && auth()->user()?->onTrial())
+            @php
+                $freeTrialRemainningDays = now()->diffInDays(auth()->user()->trial_ends_at);
+            @endphp
+                <x-alert type='info' message="Trial ends in {{ $freeTrialRemainningDays }} Days"/>
+        @endif
+
         @yield('content')
     </main>
 </div>
