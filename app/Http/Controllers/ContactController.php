@@ -67,7 +67,7 @@ class ContactController extends Controller
         $this->authorize('view',$contact);
 
         $contact->delete();
-        return redirect()->route('home')->with('alert', [
+        return back()->with('alert', [
         'message' => "Contact $contact->name successfully updated",
         'type' => 'success'
     ]);

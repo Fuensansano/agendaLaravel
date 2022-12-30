@@ -15,6 +15,18 @@
                             {{ $contact->phone_number }}</a></p>
                     <p class="me-2 mb-0 d-none d-md-block">Email:<a href="mailto:{{ $contact->email }}">
                             {{ $contact->email }}</a></p>
+
+                    <a href=" {{ route('contacts.edit', $contact->id) }}" class="btn btn-secondary mb-0 me-2 p-1 px-2">
+                        <x-icon icon="pencil"/>
+                    </a>
+
+                    <form action="{{ route('contacts.destroy', $contact->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger mb-0 p-1 px-2">
+                            <x-icon icon="trash"/>
+                        </button>
+                    </form>
                 </div>
             </div>
         @empty
