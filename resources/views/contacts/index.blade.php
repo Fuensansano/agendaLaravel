@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between bg-dark mb-3  rounded px-4 py-2">
                 <div>
                     <a href=" {{ route('contacts.show', $contact->id) }}">
-                        <img src="/img/telefono.png" alt="contact photo" style="width: 20px">
+                        <img class="photo" src="{{ Storage::url($contact->photo)  }}" alt="contact photo">
                     </a>
                 </div>
                 <div class="d-flex align-items-center">

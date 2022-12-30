@@ -8,6 +8,11 @@
                 <div class="col-md-4 mb-3">
                     <div class="card text-center">
                         <div class="card-body">
+                            <div class="d-flex justify-content-center mb-2">
+                                <a href=" {{ route('contacts.show', $contact->id) }}">
+                                <img class="photo" src="{{ Storage::url($contact->photo)  }}" alt="contact photo">
+                                </a>
+                            </div>
                             <a href=" {{ route('contacts.show', $contact->id) }}" class="text-decoration-none text-white"><h3
                                     class="card-title text-capitalize">{{ $contact->name }}</h3></a>
                             <p class="m-2">{{ $contact->phone_number }}</p>

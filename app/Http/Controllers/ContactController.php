@@ -26,7 +26,14 @@ class ContactController extends Controller
 
     public function store(StoreContactRequest $request)
     {
-        $contact = auth()->user()->contacts()->create($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos','public');
+            $data['photo'] = $path;
+        }
+
+        $contact = auth()->user()->contacts()->create($data);
 
         return redirect()->route('home')->with('alert', [
             'message' => "Contact $contact->name successfully saved",
@@ -52,9 +59,17 @@ class ContactController extends Controller
 
     public function update(StoreContactRequest $request, Contact $contact)
     {
+
+        $data = $request->validated();
+
         $this->authorize('update',$contact);
 
-        $contact->update($request->validated());
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos','public');
+            $data['photo'] = $path;
+        }
+
+        $contact->update($data);
         return redirect()->route('home')->with('alert', [
             'message' => "Contact $contact->name successfully updated",
             'type' => 'success'

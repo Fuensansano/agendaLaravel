@@ -8,9 +8,14 @@
                     <div class="card-header">Edit New Contact</div>
 
                     <div class="card-body">
-                        <form method="POST" action=" {{ route('contacts.update', $contact->id) }}">
+                        <form method="POST" action=" {{ route('contacts.update', $contact->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+
+                            <div class="d-flex justify-content-center mb-4">
+                                <img class="photo" src="{{ Storage::url($contact->photo)  }}" alt="contact photo">
+                            </div>
+
                             <div class="row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
 
@@ -70,6 +75,23 @@
                                            autocomplete="email" name="email" autofocus value="{{ old('email') ?? $contact->email }}">
 
                                     @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="photo"
+                                       class="col-md-4 col-form-label text-md-end">Photo</label>
+
+                                <div class="col-md-6">
+                                    <input id="photo" type="file"
+                                           class="form-control @error('photo') is-invalid @enderror" autocomplete="photo"
+                                           name="photo">
+
+                                    @error('photo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
