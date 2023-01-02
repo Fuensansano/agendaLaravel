@@ -52,6 +52,6 @@ class User extends Authenticatable
 
     public function sharedContacts()
     {
-        return $this->belongsToMany(Contact::class,'contacts_shares');
+        return $this->belongsToMany(Contact::class,'contact_shares');
     }
 }
