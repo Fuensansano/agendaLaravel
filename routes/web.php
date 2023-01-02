@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactShareController;
 use App\Http\Controllers\StripeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,12 @@ Auth::routes();
 Route::middleware(['auth','subscription'])->group(function (){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('contacts', ContactController::class);
+    Route::resource('contact-shares', ContactShareController::class)
+        ->except(['show','edit','update']);
+    //tMBIÉN PODEMOS PONER ONLY() con los métodos que queremos
 });
+
+
 
 
 
