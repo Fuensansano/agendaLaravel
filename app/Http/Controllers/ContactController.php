@@ -6,6 +6,7 @@ use App\Http\Requests\StoreContactRequest;
 use App\Models\Contact;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Response;
 
 class ContactController extends Controller
@@ -34,6 +35,8 @@ class ContactController extends Controller
         }
 
         $contact = auth()->user()->contacts()->create($data);
+
+        Cache::forget(auth()->id());
 
         return redirect()->route('home')->with('alert', [
             'message' => "Contact $contact->name successfully saved",
@@ -70,6 +73,9 @@ class ContactController extends Controller
         }
 
         $contact->update($data);
+
+        Cache::forget(auth()->id());
+
         return redirect()->route('home')->with('alert', [
             'message' => "Contact $contact->name successfully updated",
             'type' => 'success'
@@ -82,6 +88,9 @@ class ContactController extends Controller
         $this->authorize('view',$contact);
 
         $contact->delete();
+
+        Cache::forget(auth()->id());
+
         return back()->with('alert', [
         'message' => "Contact $contact->name successfully updated",
         'type' => 'success'
