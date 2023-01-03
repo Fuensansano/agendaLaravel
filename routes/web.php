@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactShareController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\TokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ Route::middleware(['auth','subscription'])->group(function (){
     Route::resource('contact-shares', ContactShareController::class)
         ->except(['show','edit','update']);
     //tMBIÉN PODEMOS PONER ONLY() con los métodos que queremos
+    Route::resource('tokens',TokenController::class)->only(['store','create']);
 });
 
 
